@@ -21,6 +21,7 @@ def get_faq(session: Session = Depends(get_db)):
     response = faq_controller.get_faq(session)
     return response
 
+
 @router.post('')
 def post_faq(request: FAQModel, session: Session = Depends(get_db)):
     response = faq_controller.post_faq(session=session,
@@ -28,3 +29,7 @@ def post_faq(request: FAQModel, session: Session = Depends(get_db)):
     return response
 
 
+@router.post('/csv')
+def post_faq_csv(session: Session = Depends(get_db)):
+    response = faq_controller.post_faq_csv(session=session)
+    return response
