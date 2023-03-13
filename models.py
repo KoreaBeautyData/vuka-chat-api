@@ -11,5 +11,6 @@ class FAQ(Base):
     status = Column(Integer, default=1, comment='노출 여부')
     question = Column(Text, comment='질문')
     answer = Column(Text, comment='대답')
+    history = Column(Text, comment='')
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)

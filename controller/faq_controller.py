@@ -30,7 +30,7 @@ def post_faq(request, session: Session):
 def post_faq_csv(session: Session):
     faq_list = session.query(FAQ).all()
 
-    data = []
+    data = [('prompt', 'completion')]
 
     for faq in faq_list:
         data.append((faq.question, faq.answer))
