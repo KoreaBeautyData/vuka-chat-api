@@ -26,12 +26,13 @@ def get_faq(session: Session, page, page_length, keyword):
         search_filter.append(or_(FAQ.question.like(f'%{keyword}%'),
                                  FAQ.answer.like(f'%{keyword}%')))
 
-    faq_list = session.query(FAQ).filter(*search_filter
-                                ).offset(page_length * (page - 1)).limit(page_length).all()
+    faq_query = session.query(FAQ)
+    faq_list = faq_query.filter(*search_filter
+                        ).offset(page_length * (page - 1)).limit(page_length).all()
 
     response.result_data = {
         'faq_list': faq_list,
-        'faq_count': len(faq_list)
+        'faq_count': faq_query.count()
     }
     return response
 
