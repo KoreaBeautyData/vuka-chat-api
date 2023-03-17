@@ -72,3 +72,54 @@ def get_chat(session: Session,
     result = gpt.submit_request(question)
     answer = result.choices[0].text.strip()
     return answer
+
+def fine_tuning(session: Session):
+    openai.api_key = config.SECRET_KEY
+    # openai.File.create(
+    #     file=open("csv_file/faq2_prepared.jsonl", "rb"),
+    #     purpose='fine-tune'
+    # )
+
+    fine_tune_list = openai.FineTune.list()
+    # fine_tune_event_list = openai.FineTune.list_events(id="ft-ZH4wTwGqbYNIxjRPaCD7uQ6A")
+    # file_list = openai.File.list()
+    # engine = openai.Engine.list()
+    # file_retrieve = openai.File.retrieve("file-te85pltb1FpkGWZI6xdQ4TCQ")
+    # content = openai.File.download("file-te85pltb1FpkGWZI6xdQ4TCQ")
+
+    # response = openai.Completion.create(
+    #     model=config.engine_tuning,
+    #     prompt=f"뷰카프로는 어떤 서비스인가요{config.PROMPT_END_WITH}",
+    #     max_tokens=config.max_tokens,
+    #     temperature=config.temperature,
+    #     top_p=config.top_p,
+    #     best_of=config.best_of,
+    #     frequency_penalty=config.frequency_penalty,
+    #     presence_penalty=config.presence_penalty,
+    #     stop=config.stop
+    # )
+
+
+    import random
+
+    faq_query = session.query(FAQ)
+    random_faq_id = random.randrange(1, faq_query.count())
+    faq = faq_query.filter(FAQ.id == random_faq_id).first()
+
+    response = openai.Completion.create(
+        model=config.engine_tuning,
+        prompt=f"{faq.question}{config.PROMPT_END_WITH}",
+        temperature=config.temperature,
+        max_tokens=config.max_tokens,
+        top_p=config.top_p,
+        frequency_penalty=0.0,
+        presence_penalty=0.0,
+        stop=config.stop
+    )
+    result = {
+        'question': faq.question,
+        'answer': faq.answer,
+        'ai_Q': f"{faq.question}{config.PROMPT_END_WITH}",
+        'ai_A': response.choices[0].text.strip()
+    }
+    return result

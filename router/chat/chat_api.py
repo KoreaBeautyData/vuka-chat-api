@@ -16,3 +16,9 @@ def get_chat(question: Optional[str] = None,
     response = chat_controller.get_chat(question=question,
                                         session=session)
     return response
+
+
+@router.get('/tuning')
+def get_fine_tuning(session: Session = Depends(get_db)):
+    response = chat_controller.fine_tuning(session=session)
+    return response
