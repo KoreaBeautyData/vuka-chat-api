@@ -1,5 +1,5 @@
 import openai, uuid
-from config import *
+from config.config import *
 
 
 def set_openai_key():
@@ -38,7 +38,7 @@ class GPT:
     A user can add examples and set parameters of the API request.
     """
     def __init__(self,
-                 engine=engine3,
+                 engine=engine,
                  temperature=temperature,
                  max_tokens=max_tokens,
                  input_prefix="Q: ",

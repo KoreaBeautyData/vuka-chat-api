@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Optional
 
 from database import schema
 from database.database import get_db
@@ -11,9 +11,15 @@ router = APIRouter(
 )
 
 
-@router.get('', response_model=List[schema.FAQSchema])
-def get_faq(session: Session = Depends(get_db)):
-    response = faq_controller.get_faq(session=session)
+@router.get('', response_model=schema.DefaultModel)
+def get_faq(session: Session = Depends(get_db),
+            page: Optional[int] = 1,
+            page_length: Optional[int] = 3,
+            keyword: Optional[str] = None):
+    response = faq_controller.get_faq(session=session,
+                                      page=page,
+                                      page_length=page_length,
+                                      keyword=keyword)
     return response
 
 

@@ -1,12 +1,12 @@
 import openai
 
-from typing import Optional, List
+from typing import Optional
 from fastapi import APIRouter
-from sqlalchemy import or_, and_, BinaryExpression
+from sqlalchemy import or_
 from sqlalchemy.orm import Session
 
-import config
-from models import FAQ
+from config import config
+from database.models import FAQ
 from router.chat.gpt import GPT, Example
 
 
@@ -16,7 +16,7 @@ router = APIRouter(
 
 
 def get_chat(session: Session,
-               question: Optional[str] = None):
+             question: Optional[str] = None):
     openai.api_key = config.SECRET_KEY
     # prompt_initial = f'Human:%s\nAI:' % (question)
     #
@@ -53,9 +53,10 @@ def get_chat(session: Session,
     gpt = GPT(temperature=config.temperature, max_tokens=config.max_tokens)
 
     query_filter = []
-    for q in question.split(' '):
-        query_filter.append(or_(FAQ.question.like(f'%{q}%'),
-                                FAQ.answer.like(f'%{q}%')))
+    if question is not None:
+        for q in question.split(' '):
+            query_filter.append(or_(FAQ.question.like(f'%{q}%'),
+                                    FAQ.answer.like(f'%{q}%')))
 
     faqs = session.query(FAQ).filter(*query_filter).all()
 
