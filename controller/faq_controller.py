@@ -50,9 +50,9 @@ def post_faq_csv(session: Session):
     data = []
 
     for faq in faq_list:
-        data.append((f'{faq.question}{config.PROMPT_END_WITH3}', f' {faq.answer}'))
+        data.append((f'{faq.question}{config.PROMPT_END_WITH3}', f' {faq.answer} {config.COMPLETION_END_WITH}'))
 
-    file = open('csv_file/faq2.csv', 'w', newline='')
+    file = open('csv_file/faq.csv', 'w', newline='')
     writer = csv.writer(file)
     writer.writerows(data)
     file.close()

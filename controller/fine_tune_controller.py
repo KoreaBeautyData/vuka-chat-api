@@ -1,5 +1,4 @@
 import openai
-import shutil
 import json
 import csv
 
@@ -16,13 +15,11 @@ def get_fine_tune_list():
     fine_tune_list = openai.FineTune.list()
     return fine_tune_list
 
-def post_convert_csv_to_jsonl(file):
+def post_convert_csv_to_jsonl():
     path = f'csv_file/'
-    filename = file.filename.split('.')[0]
-    with open(f'{path}{file.filename}', 'w+b') as buffer:
-        shutil.copyfileobj(file.file, buffer)
+    filename = 'faq.csv'
 
-    csvfile = open(f'{path}{file.filename}', 'r')
+    csvfile = open(f'{path}{filename}', 'r')
     jsonfile = open(f'{path}{filename}_prepared.jsonl', 'w')
 
     fieldnames = ("prompt", "completion")
@@ -32,14 +29,14 @@ def post_convert_csv_to_jsonl(file):
         jsonfile.write('\n')
     return jsonfile.name
 
-def post_fine_tuning(file, session: Session):
+def post_fine_tuning(session: Session):
     response = DefaultModel()
 
     openai.api_key = config.SECRET_KEY
 
     # 파일 업로드
     tune_file = openai.File.create(
-        file=open(f'csv_file/{file.filename}', 'rb'),
+        file=open(f'csv_file/faq.csv', 'rb'),
         purpose='fine-tune'
     )
 

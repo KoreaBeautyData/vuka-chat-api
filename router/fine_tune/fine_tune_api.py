@@ -18,16 +18,14 @@ def get_fine_tune_list():
 
 
 @router.post('/convert')
-def post_convert_csv_to_jsonl(file: UploadFile = File(...)):
-    response = fine_tune_controller.post_convert_csv_to_jsonl(file=file)
+def post_convert_csv_to_jsonl():
+    response = fine_tune_controller.post_convert_csv_to_jsonl()
     return response
 
 
 @router.post('/tuning')
-def post_fine_tuning(session: Session = Depends(get_db),
-                     file: UploadFile = File(...)):
-    response = fine_tune_controller.post_fine_tuning(session=session,
-                                                     file=file)
+def post_fine_tuning(session: Session = Depends(get_db)):
+    response = fine_tune_controller.post_fine_tuning(session=session)
     return response
 
 
