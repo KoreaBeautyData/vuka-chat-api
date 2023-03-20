@@ -13,11 +13,15 @@ origins = [
     "http://localhost:5173",
     "http://3.35.21.66:8000",
     "http://3.35.21.66",
+    "openai.codecom.co.kr:8000",
+    "openai.codecom.co.kr",
+    "http://openai.codecom.co.kr:8000/",
+    "http://openai.codecom.co.kr/",
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
