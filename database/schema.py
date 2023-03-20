@@ -14,3 +14,7 @@ class FAQSchema(DefaultModel):
     id: int
     question: str
     answer: str
+
+
+class ChatSchema(BaseModel):
+    question: str

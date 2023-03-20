@@ -4,13 +4,9 @@ from fastapi import APIRouter
 from sqlalchemy import or_
 from sqlalchemy.orm import Session
 
-from database.schema import DefaultModel
+from database.schema import *
 from database.models import FAQ
 from config import config
-
-router = APIRouter(
-    prefix="/api/faq",
-)
 
 
 def get_faq(session: Session, page, page_length, keyword):
@@ -26,9 +22,8 @@ def get_faq(session: Session, page, page_length, keyword):
         search_filter.append(or_(FAQ.question.like(f'%{keyword}%'),
                                  FAQ.answer.like(f'%{keyword}%')))
 
-    faq_query = session.query(FAQ)
-    faq_list = faq_query.filter(*search_filter
-                        ).offset(page_length * (page - 1)).limit(page_length).all()
+    faq_query = session.query(FAQ).filter(*search_filter)
+    faq_list = faq_query.offset(page_length * (page - 1)).limit(page_length).all()
 
     response.result_data = {
         'faq_list': faq_list,
@@ -52,10 +47,10 @@ def post_faq(request, session: Session):
 def post_faq_csv(session: Session):
     faq_list = session.query(FAQ).all()
 
-    data = [('prompt', 'completion')]
+    data = []
 
     for faq in faq_list:
-        data.append((f'{faq.question}{config.PROMPT_END_WITH}', f' {faq.answer}'))
+        data.append((f'{faq.question}{config.PROMPT_END_WITH3}', f' {faq.answer}'))
 
     file = open('csv_file/faq2.csv', 'w', newline='')
     writer = csv.writer(file)
