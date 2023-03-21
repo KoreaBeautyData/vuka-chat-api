@@ -21,9 +21,6 @@
                 push("/faq/" + faq_id)
             }
         )
-        console.log(faq_id);
-        console.log(question);
-        console.log(answer);
     }
 </script>
 

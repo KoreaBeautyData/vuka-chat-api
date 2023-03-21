@@ -36,11 +36,23 @@
             )
         }
     }
+
+    function post_faq_csv(event) {
+        event.preventDefault()
+
+        fastapi('post', "/api/faq/csv", {}, (json) => {
+                push("/faq")
+            }
+        )
+    }
 </script>
 
 <div class="container mt-3" style="max-width:100%;">
   <div class="row">
-    <div class="col-2 float-left"><a use:link href="/faq/create" class="btn btn-info">등록</a></div>
+    <div class="col-2 float-left">
+        <a use:link href="/faq/create" class="btn btn-info">등록</a>
+        <button class="btn btn-secondary float-right" on:click={post_faq_csv}>CSV 업로드</button>
+    </div>
     <div class="col-9 input-group">
         <input type="text" class="form-control mr-3" bind:value="{kw}">
         <button class="btn btn-outline-secondary" on:click={() => get_faq_list(1)}>검색</button>
