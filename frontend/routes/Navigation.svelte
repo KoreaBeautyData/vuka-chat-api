@@ -5,12 +5,12 @@
 <!-- 네비게이션바 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="container-fluid">
-        <a use:link class="navbar-brand" href="/">FAQ</a>
+        <a use:link class="navbar-brand" href="/faq">FAQ</a>
         <button
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
+            data-bs-target="#navbarSupportedContsent"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation">

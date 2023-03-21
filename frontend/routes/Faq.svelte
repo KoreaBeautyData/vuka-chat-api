@@ -35,7 +35,7 @@
 
 {#each faq_list as faq}
 <div class="card text-left bg-light mb-3s">
-  <h5 class="card-header">{faq.question}</h5>
+  <h5 class="card-header"><a use:link href="/faq/{faq.id}">{faq.question}</a></h5>
   <div class="card-body">
     <p class="card-text">{faq.answer}</p>
   </div>
