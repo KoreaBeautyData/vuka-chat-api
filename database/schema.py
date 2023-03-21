@@ -10,7 +10,12 @@ class DefaultModel(BaseModel):
         orm_mode = True
 
 
-class FAQSchema(DefaultModel):
+class FAQSchema(BaseModel):
+    question: str
+    answer: str
+
+
+class FAQDetailSchema(DefaultModel):
     id: int
     question: str
     answer: str

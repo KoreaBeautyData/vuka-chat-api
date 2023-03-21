@@ -1,12 +1,12 @@
 import csv
 
-from fastapi import APIRouter
 from sqlalchemy import or_
 from sqlalchemy.orm import Session
 
 from database.schema import *
 from database.models import FAQ
 from config import config
+from config.error_handling import UnicornException
 
 
 def get_faq(session: Session, page, page_length, keyword):
@@ -22,7 +22,8 @@ def get_faq(session: Session, page, page_length, keyword):
         search_filter.append(or_(FAQ.question.like(f'%{keyword}%'),
                                  FAQ.answer.like(f'%{keyword}%')))
 
-    faq_query = session.query(FAQ).filter(*search_filter)
+    faq_query = session.query(FAQ).filter(FAQ.status >= config.STATUS_INACTIVE,
+                                          *search_filter)
     faq_list = faq_query.offset(page_length * (page - 1)).limit(page_length).all()
 
     response.result_data = {
@@ -44,8 +45,51 @@ def post_faq(request, session: Session):
     return faq
 
 
+def put_faq_detail(faq_id, request, session: Session):
+    question = request.question
+    answer = request.answer
+
+    faq = session.query(FAQ).filter(FAQ.status >= config.STATUS_INACTIVE,
+                                    FAQ.id == faq_id).first()
+    if faq is None:
+        raise UnicornException(result_msg=config.ERROR_DATA_NOT_EXIST[1],
+                               result_code=config.ERROR_DATA_NOT_EXIST[0])
+
+    faq.question = question
+    faq.answer = answer
+    session.commit()
+    return faq
+
+
+def get_faq_detail(faq_id, session: Session):
+    response = DefaultModel()
+    faq = session.query(FAQ).filter(FAQ.id == faq_id,
+                                    FAQ.status >= config.STATUS_INACTIVE).first()
+    if faq is None:
+        raise UnicornException(result_msg=config.ERROR_DATA_NOT_EXIST[1],
+                               result_code=config.ERROR_DATA_NOT_EXIST[0])
+
+    response.result_data = {
+        'faq': faq
+    }
+    return response
+
+
+def delete_faq_detail(faq_id, session: Session):
+    response = DefaultModel()
+
+    faq = session.query(FAQ).filter(FAQ.id == faq_id).first()
+    if faq is None:
+        raise UnicornException(result_msg=config.ERROR_DATA_NOT_EXIST[1],
+                               result_code=config.ERROR_DATA_NOT_EXIST[0])
+
+    faq.status = config.STATUS_DELETE
+    session.commit()
+    return response
+
+
 def post_faq_csv(session: Session):
-    faq_list = session.query(FAQ).all()
+    faq_list = session.query(FAQ).filter(FAQ.status >= config.STATUS_INACTIVE).all()
 
     data = []
 

@@ -11,7 +11,7 @@ router = APIRouter(
 )
 
 
-@router.get('', response_model=schema.DefaultModel)
+@router.get('', tags=['faq'])
 def get_faq(session: Session = Depends(get_db),
             page: Optional[int] = 1,
             page_length: Optional[int] = 3,
@@ -23,15 +23,41 @@ def get_faq(session: Session = Depends(get_db),
     return response
 
 
-@router.post('')
-def post_faq(request: schema.FAQSchema,
+@router.post('', tags=['faq'])
+def post_faq(request: schema.FAQSchema = Depends(),
              session: Session = Depends(get_db)):
     response = faq_controller.post_faq(session=session,
                                        request=request)
     return response
 
 
-@router.post('/csv')
+@router.put('/{faq_id}', tags=['faq'])
+def put_faq_detail(faq_id: int,
+                   request: schema.FAQSchema = Depends(),
+                   session: Session = Depends(get_db)):
+    response = faq_controller.put_faq_detail(faq_id=faq_id,
+                                             session=session,
+                                             request=request)
+    return response
+
+
+@router.get('/{faq_id}', tags=['faq'])
+def get_faq_detail(faq_id: int,
+                   session: Session = Depends(get_db)):
+    response = faq_controller.get_faq_detail(faq_id=faq_id,
+                                             session=session)
+    return response
+
+
+@router.delete('/{faq_id}', tags=['faq'])
+def delete_faq_detail(faq_id: int,
+                      session: Session = Depends(get_db)):
+    response = faq_controller.delete_faq_detail(faq_id=faq_id,
+                                                session=session)
+    return response
+
+
+@router.post('/csv', tags=['faq'])
 def post_faq_csv(session: Session = Depends(get_db)):
     response = faq_controller.post_faq_csv(session=session)
     return response

@@ -1,9 +1,5 @@
 import openai
-import shutil
 
-from typing import Optional
-from fastapi import APIRouter
-from sqlalchemy import or_
 from sqlalchemy.orm import Session
 
 from config import config
