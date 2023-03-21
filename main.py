@@ -35,14 +35,7 @@ async def unicorn_exception_handler(request: Request, exc: UnicornException):
                  'result_code': exc.result_code})
 
 origins = [
-    "http://127.0.0.1:8000",
-    "http://localhost:5173",
-    "http://3.35.21.66:8000",
-    "http://3.35.21.66",
-    "openai.codecom.co.kr:8000",
-    "openai.codecom.co.kr",
-    "http://openai.codecom.co.kr:8000/",
-    "http://openai.codecom.co.kr/",
+    "*",
 ]
 
 app.add_middleware(
