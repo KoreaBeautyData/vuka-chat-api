@@ -23,8 +23,8 @@ def get_faq(session: Session = Depends(get_db),
     return response
 
 
-@router.post('', tags=['faq'])
-def post_faq(request: schema.FAQSchema = Depends(),
+@router.post('', tags=['faq'], response_model=schema.FAQSchema)
+def post_faq(request: schema.FAQCreateSchema,
              session: Session = Depends(get_db)):
     response = faq_controller.post_faq(session=session,
                                        request=request)
@@ -33,7 +33,7 @@ def post_faq(request: schema.FAQSchema = Depends(),
 
 @router.put('/{faq_id}', tags=['faq'], response_model=schema.FAQSchema)
 def put_faq_detail(faq_id: int,
-                   request: schema.FAQSchema,
+                   request: schema.FAQCreateSchema,
                    session: Session = Depends(get_db)):
     response = faq_controller.put_faq_detail(faq_id=faq_id,
                                              session=session,

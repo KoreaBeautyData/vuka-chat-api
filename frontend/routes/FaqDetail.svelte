@@ -36,6 +36,7 @@
   <div class="card-body">
     <p class="card-text">{faq.answer}</p>
 
+    <a use:link href="/faq" class="btn btn-success" style="margin-top: 47px;">목록</a>
     <button class="btn btn-danger float-right m-2 mt-5" on:click={() => delete_faq_detail(faq.id)}>삭제</button>
     <a use:link href="/faq/modify/{faq.id}" class="btn btn-warning float-right m-2 mt-5">수정</a>
   </div>

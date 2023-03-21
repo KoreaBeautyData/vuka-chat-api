@@ -22,22 +22,39 @@
         })
     }
     get_faq_list(page);
+
+    function delete_faq_detail(faq_id) {
+        if(window.confirm('정말로 삭제하시겠습니까?')) {
+
+            let url = "/api/faq/" + faq_id
+            let params = {
+                faq_id: faq_id
+            }
+            fastapi('delete', url, params, (json) => {
+                    push('/faq')
+                }
+            )
+        }
+    }
 </script>
 
-<div class="col-4 m-3">
-    <div class="input-group">
+<div class="container mt-3" style="max-width:100%;">
+  <div class="row">
+    <div class="col-2 float-left"><a use:link href="/faq/create" class="btn btn-info">등록</a></div>
+    <div class="col-9 input-group">
         <input type="text" class="form-control mr-3" bind:value="{kw}">
-        <button class="btn btn-outline-secondary" on:click={() => get_faq_list(1)}>
-            검색
-        </button>
+        <button class="btn btn-outline-secondary" on:click={() => get_faq_list(1)}>검색</button>
     </div>
+  </div>
 </div>
 
 {#each faq_list as faq}
-<div class="card text-left bg-light mb-3s">
+<div class="card text-left bg-light mb-3">
   <h5 class="card-header"><a use:link href="/faq/{faq.id}">{faq.question}</a></h5>
   <div class="card-body">
     <p class="card-text">{faq.answer}</p>
+    <button class="btn btn-danger float-right" on:click={() => delete_faq_detail(faq.id)}>삭제</button>
+    <a use:link href="/faq/modify/{faq.id}" class="btn btn-warning float-right mr-2">수정</a>
   </div>
 </div>
 {/each}

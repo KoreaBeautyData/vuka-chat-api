@@ -2,29 +2,28 @@
     import { push } from 'svelte-spa-router'
     import fastapi from "../src/lib/api"
 
-    export let params = {}
-    const faq_id = params.faq_id
+    let faq_id = '';
+    let question = '';
+    let answer = '';
 
-    let question = ''
-    let answer = ''
-
-    fastapi("get", "/api/faq/" + faq_id, {}, (json) => {
-        question = json.result_data.faq.question
-        answer = json.result_data.faq.answer
-    })
-
-    function put_faq_detail(event) {
+    function post_faq(event) {
         event.preventDefault()
-        
-        let url = "/api/faq/" + faq_id
+
+        let url = "/api/faq"
         let params = {
             question: question,
             answer: answer,
         }
-        fastapi('put', url, params, (json) => {
-                push("/faq/"+faq_id)
+        fastapi('post', url, params, (json) => {
+                faq_id = json.id
+                question = json.question
+                answer = json.answer
+                push("/faq/" + faq_id)
             }
         )
+        console.log(faq_id);
+        console.log(question);
+        console.log(answer);
     }
 </script>
 
@@ -38,6 +37,6 @@
             <label for="answer">Answer</label>
             <textarea class="form-control" rows="10" bind:value="{answer}"></textarea>
         </div>
-        <button class="btn btn-warning float-right" on:click="{put_faq_detail}">수정</button>
+        <button class="btn btn-success float-right" on:click="{post_faq}">저장</button>
     </form>
 </div>

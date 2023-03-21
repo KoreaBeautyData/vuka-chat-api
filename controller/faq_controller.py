@@ -38,9 +38,12 @@ def post_faq(request, session: Session):
     answer = request.answer
 
     faq = FAQ()
+    session.add(faq)
+    session.flush()
+
     faq.question = question
     faq.answer = answer
-    session.add(faq)
+
     session.commit()
     return faq
 
