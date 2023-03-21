@@ -14,6 +14,9 @@ class FAQSchema(BaseModel):
     question: str
     answer: str
 
+    class Config:
+        orm_mode = True
+
 
 class FAQDetailSchema(DefaultModel):
     id: int

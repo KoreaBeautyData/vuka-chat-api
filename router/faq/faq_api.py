@@ -31,9 +31,9 @@ def post_faq(request: schema.FAQSchema = Depends(),
     return response
 
 
-@router.put('/{faq_id}', tags=['faq'])
+@router.put('/{faq_id}', tags=['faq'], response_model=schema.FAQSchema)
 def put_faq_detail(faq_id: int,
-                   request: schema.FAQSchema = Depends(),
+                   request: schema.FAQSchema,
                    session: Session = Depends(get_db)):
     response = faq_controller.put_faq_detail(faq_id=faq_id,
                                              session=session,

@@ -23,7 +23,7 @@ def get_faq(session: Session, page, page_length, keyword):
                                  FAQ.answer.like(f'%{keyword}%')))
 
     faq_query = session.query(FAQ).filter(FAQ.status >= config.STATUS_INACTIVE,
-                                          *search_filter)
+                                          *search_filter).order_by(FAQ.id.asc())
     faq_list = faq_query.offset(page_length * (page - 1)).limit(page_length).all()
 
     response.result_data = {

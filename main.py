@@ -53,6 +53,6 @@ app.include_router(fine_tune_api.router)
 app.mount("/assets", StaticFiles(directory="frontend/dist/assets"))
 
 
-@app.get("/")
+@app.get("/faq")
 def index():
     return FileResponse("frontend/dist/index.html")
