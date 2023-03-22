@@ -58,6 +58,8 @@ def delete_faq_detail(faq_id: int,
 
 
 @router.post('/csv', tags=['faq'])
-def post_faq_csv(session: Session = Depends(get_db)):
-    response = faq_controller.post_faq_csv(session=session)
+def post_faq_csv(request: schema.FileSchema,
+                 session: Session = Depends(get_db)):
+    response = faq_controller.post_faq_csv(request=request,
+                                           session=session)
     return response

@@ -5,7 +5,7 @@
     let faq_list = [];
     let faq_count = 0;
     let page = 1;
-    let page_length = 3;
+    let page_length = 7;
     let kw = ''
     $: total_page = Math.ceil(faq_count/page_length)
 
@@ -47,30 +47,35 @@
     }
 </script>
 
-<div class="container mt-3" style="max-width:100%;">
-  <div class="row">
-    <div class="col-2 float-left">
-        <a use:link href="/faq/create" class="btn btn-info">등록</a>
-        <button class="btn btn-secondary float-right" on:click={post_faq_csv}>CSV 업로드</button>
-    </div>
-    <div class="col-9 input-group">
-        <input type="text" class="form-control mr-3" bind:value="{kw}">
-        <button class="btn btn-outline-secondary" on:click={() => get_faq_list(1)}>검색</button>
-    </div>
+<nav class="navbar bg-body-tertiary mb-3 mt-3">
+  <div class="container-fluid">
+    <a use:link href="/faq/create" class="btn btn-outline-info">FAQ 등록</a>
+    <form class="d-flex" role="search">
+      <input type="text" class="form-control float-right mr-3" bind:value="{kw}" style="width:70%">
+      <button class="btn btn-outline-secondary" on:click={() => get_faq_list(1)}>Search</button>
+    </form>
   </div>
-</div>
+</nav>
 
-{#each faq_list as faq}
-<div class="card text-left bg-light mb-3">
-  <h5 class="card-header"><a use:link href="/faq/{faq.id}">{faq.question}</a></h5>
-  <div class="card-body">
-    <p class="card-text">{faq.answer}</p>
-    <button class="btn btn-danger float-right" on:click={() => delete_faq_detail(faq.id)}>삭제</button>
-    <a use:link href="/faq/modify/{faq.id}" class="btn btn-warning float-right mr-2">수정</a>
-  </div>
-</div>
-{/each}
-
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Question</th>
+      <th scope="col" colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {#each faq_list as faq}
+    <tr>
+      <th scope="row">{faq.id}</th>
+      <td><a use:link href="/faq/{faq.id}">{faq.question}</a></td>
+      <td><button class="btn btn-outline-danger float-right" on:click={() => delete_faq_detail(faq.id)}>삭제</button></td>
+      <td><a use:link href="/faq/modify/{faq.id}" class="btn btn-outline-warning float-right mr-2">수정</a></td>
+    </tr>
+    {/each}
+  </tbody>
+</table>
 
 <!-- 페이징처리 시작 -->
 <ul class="pagination justify-content-center">

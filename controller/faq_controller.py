@@ -4,7 +4,7 @@ from sqlalchemy import or_
 from sqlalchemy.orm import Session
 
 from database.schema import *
-from database.models import FAQ
+from database.models import FAQ, FineTune
 from config.config import *
 from config.error_handling import UnicornException
 
@@ -91,7 +91,7 @@ def delete_faq_detail(faq_id, session: Session):
     return response
 
 
-def post_faq_csv(session: Session):
+def post_faq_csv(session: Session, request):
     faq_list = session.query(FAQ).filter(FAQ.status >= STATUS_INACTIVE).all()
 
     data = []
@@ -99,8 +99,17 @@ def post_faq_csv(session: Session):
     for faq in faq_list:
         data.append((f'{faq.question}\n뷰카프로 ->\n', f' {faq.answer} \n##\n'))
 
-    file = open('./faq.csv', 'w', newline='')
+    file = open(f'csv_file/{request.filename}.csv', 'w', newline='')
     writer = csv.writer(file)
     writer.writerows(data)
     file.close()
-    return file.name
+
+    fine_tune = FineTune()
+    fine_tune.filename = f'{request.filename}.csv'
+    session.add(fine_tune)
+    session.commit()
+
+    result = {
+        'filename': request.filename
+    }
+    return result

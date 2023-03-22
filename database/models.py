@@ -24,6 +24,7 @@ class FineTune(Base):
     ft_id = Column(String(45))
     model = Column(String(45))
     fine_tuned_model = Column(String(45))
+    filename = Column(String(45))
     data = Column(Text)
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)

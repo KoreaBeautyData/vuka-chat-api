@@ -35,12 +35,12 @@ async def unicorn_exception_handler(request: Request, exc: UnicornException):
                  'result_code': exc.result_code})
 
 origins = [
-    "*",
+    "*"
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

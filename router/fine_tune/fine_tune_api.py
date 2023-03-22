@@ -12,20 +12,38 @@ router = APIRouter(
 
 
 @router.get('', tags=['fine-tune'])
-def get_fine_tune_list():
-    response = fine_tune_controller.get_fine_tune_list()
+def get_fine_tune_list(session: Session = Depends(get_db),
+                       page: Optional[int] = 1,
+                       page_length: Optional[int] = 3,
+                       refresh: Optional[bool] = False):
+    response = fine_tune_controller.get_fine_tune_list(session=session,
+                                                       page=page,
+                                                       page_length=page_length,
+                                                       refresh=refresh)
+    return response
+
+
+@router.get('/{fine_tune_id}', tags=['fine-tune'])
+def get_fine_tune_detail(fine_tune_id: int,
+                         session: Session = Depends(get_db)):
+    response = fine_tune_controller.get_fine_tune_detail(fine_tune_id=fine_tune_id,
+                                                         session=session)
     return response
 
 
 @router.post('/convert', tags=['fine-tune'])
-def post_convert_csv_to_jsonl():
-    response = fine_tune_controller.post_convert_csv_to_jsonl()
+def post_convert_csv_to_jsonl(request: schema.FileSchema,
+                              session: Session = Depends(get_db)):
+    response = fine_tune_controller.post_convert_csv_to_jsonl(session=session,
+                                                              request=request)
     return response
 
 
 @router.post('/tuning', tags=['fine-tune'])
-def post_fine_tuning(session: Session = Depends(get_db)):
-    response = fine_tune_controller.post_fine_tuning(session=session)
+def post_fine_tuning(request: schema.FileSchema,
+                     session: Session = Depends(get_db)):
+    response = fine_tune_controller.post_fine_tuning(request=request,
+                                                     session=session)
     return response
 
 

@@ -5,6 +5,8 @@
   import FaqDetail from "../routes/FaqDetail.svelte"
   import FaqDetailModify from "../routes/FaqDetailModify.svelte"
   import Chat from "../routes/Chat.svelte"
+  import Tuning from "../routes/Tuning.svelte"
+  import TuningDetail from "../routes/TuningDetail.svelte"
   import Navigation from "../routes/Navigation.svelte"
 
   const routes = {
@@ -13,6 +15,8 @@
     "/faq/:faq_id": FaqDetail,
     "/faq/modify/:faq_id": FaqDetailModify,
     "/chat": Chat,
+    "/tuning": Tuning,
+    "/tuning/:fine_tune_id": TuningDetail,
   }
 </script>
 

@@ -35,3 +35,10 @@ class FAQDetailSchema(DefaultModel):
 
 class ChatSchema(BaseModel):
     question: str
+
+
+class FileSchema(BaseModel):
+    filename: str
+
+    class Config:
+        orm_mode = True
