@@ -97,7 +97,7 @@ def post_faq_csv(session: Session):
     data = []
 
     for faq in faq_list:
-        data.append((f'{faq.question}{PROMPT_END_WITH3}', f' {faq.answer} {COMPLETION_END_WITH}'))
+        data.append((f'{faq.question}\n뷰카프로 ->\n', f' {faq.answer} \n##\n'))
 
     file = open('./faq.csv', 'w', newline='')
     writer = csv.writer(file)
