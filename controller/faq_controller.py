@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from database.schema import *
 from database.models import FAQ
-from config import config
+from config.config import *
 from config.error_handling import UnicornException
 
 
@@ -22,7 +22,7 @@ def get_faq(session: Session, page, page_length, keyword):
         search_filter.append(or_(FAQ.question.like(f'%{keyword}%'),
                                  FAQ.answer.like(f'%{keyword}%')))
 
-    faq_query = session.query(FAQ).filter(FAQ.status >= config.STATUS_INACTIVE,
+    faq_query = session.query(FAQ).filter(FAQ.status >= STATUS_INACTIVE,
                                           *search_filter).order_by(FAQ.id.asc())
     faq_list = faq_query.offset(page_length * (page - 1)).limit(page_length).all()
 
@@ -52,11 +52,11 @@ def put_faq_detail(faq_id, request, session: Session):
     question = request.question
     answer = request.answer
 
-    faq = session.query(FAQ).filter(FAQ.status >= config.STATUS_INACTIVE,
+    faq = session.query(FAQ).filter(FAQ.status >= STATUS_INACTIVE,
                                     FAQ.id == faq_id).first()
     if faq is None:
-        raise UnicornException(result_msg=config.ERROR_DATA_NOT_EXIST[1],
-                               result_code=config.ERROR_DATA_NOT_EXIST[0])
+        raise UnicornException(result_msg=ERROR_DATA_NOT_EXIST[1],
+                               result_code=ERROR_DATA_NOT_EXIST[0])
 
     faq.question = question
     faq.answer = answer
@@ -67,10 +67,10 @@ def put_faq_detail(faq_id, request, session: Session):
 def get_faq_detail(faq_id, session: Session):
     response = DefaultModel()
     faq = session.query(FAQ).filter(FAQ.id == faq_id,
-                                    FAQ.status >= config.STATUS_INACTIVE).first()
+                                    FAQ.status >= STATUS_INACTIVE).first()
     if faq is None:
-        raise UnicornException(result_msg=config.ERROR_DATA_NOT_EXIST[1],
-                               result_code=config.ERROR_DATA_NOT_EXIST[0])
+        raise UnicornException(result_msg=ERROR_DATA_NOT_EXIST[1],
+                               result_code=ERROR_DATA_NOT_EXIST[0])
 
     response.result_data = {
         'faq': faq
@@ -83,29 +83,24 @@ def delete_faq_detail(faq_id, session: Session):
 
     faq = session.query(FAQ).filter(FAQ.id == faq_id).first()
     if faq is None:
-        raise UnicornException(result_msg=config.ERROR_DATA_NOT_EXIST[1],
-                               result_code=config.ERROR_DATA_NOT_EXIST[0])
+        raise UnicornException(result_msg=ERROR_DATA_NOT_EXIST[1],
+                               result_code=ERROR_DATA_NOT_EXIST[0])
 
-    faq.status = config.STATUS_DELETE
+    faq.status = STATUS_DELETE
     session.commit()
     return response
 
 
 def post_faq_csv(session: Session):
-    faq_list = session.query(FAQ).filter(FAQ.status >= config.STATUS_INACTIVE).all()
+    faq_list = session.query(FAQ).filter(FAQ.status >= STATUS_INACTIVE).all()
 
     data = []
 
     for faq in faq_list:
-        data.append((f'{faq.question}{config.PROMPT_END_WITH3}', f' {faq.answer} {config.COMPLETION_END_WITH}'))
+        data.append((f'{faq.question}{PROMPT_END_WITH3}', f' {faq.answer} {COMPLETION_END_WITH}'))
 
     file = open('./faq.csv', 'w', newline='')
     writer = csv.writer(file)
     writer.writerows(data)
     file.close()
-
-    result = {
-        'path': file.name,
-        'data': data
-    }
-    return result
+    return file.name
