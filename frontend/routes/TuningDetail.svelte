@@ -69,8 +69,8 @@
         </form>
       </td>
       <td>
-        <button class="btn btn-outline-info float-right ml-3" on:click="{post_fine_tune_convert}">변환</button>
-        <button class="btn btn-outline-success float-right" on:click="{post_fine_tuning}">튜닝</button>
+        <button class="btn btn-outline-info mr-5" on:click="{post_fine_tune_convert}">변환</button>
+        <button class="btn btn-outline-success" on:click="{post_fine_tuning}">튜닝</button>
       </td>
     </tr>
   </tbody>

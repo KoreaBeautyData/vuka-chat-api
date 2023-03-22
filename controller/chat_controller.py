@@ -3,6 +3,7 @@ import openai
 from sqlalchemy.orm import Session
 
 from config import config
+from config.error_handling import UnicornException
 from database.models import FAQ, FineTune
 from router.chat.gpt import GPT, Example
 
@@ -11,18 +12,21 @@ def post_chat(request, session: Session):
     openai.api_key = config.SECRET_KEY
 
     question = request.question
+    fine_tuned_model = request.fine_tuned_model
     if question is not None:
         question = question.strip()
 
-    last_fine_tune_model = session.query(FineTune).filter(FineTune.status == 'succeeded'
-                                                ).order_by(FineTune.id.desc()).first()
-    if last_fine_tune_model is not None:
-        model = last_fine_tune_model.fine_tuned_model
+    if fine_tuned_model is not None:
+        fine_tune = session.query(FineTune).filter(FineTune.fine_tuned_model.like(f'%{fine_tuned_model}%')).first()
+        if fine_tune is None:
+            return UnicornException(result_msg=config.ERROR_MODEL_NOT_EXIST[1],
+                                    result_code=config.ERROR_MODEL_NOT_EXIST[0])
     else:
-        model = config.model
+        fine_tune = session.query(FineTune).filter(FineTune.status == 'succeeded'
+                                                   ).order_by(FineTune.id.desc()).first()
 
     response = openai.Completion.create(
-        model=model,
+        model=fine_tune.model,
         prompt=f"{question}{config.PROMPT_END_WITH3}",
         temperature=config.temperature,
         max_tokens=config.max_tokens,

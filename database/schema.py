@@ -35,6 +35,7 @@ class FAQDetailSchema(DefaultModel):
 
 class ChatSchema(BaseModel):
     question: str
+    fine_tuned_model: str
 
 
 class FileSchema(BaseModel):
