@@ -10,6 +10,7 @@ const fastapi = (operation, url, params, success_callback, failure_callback) => 
 
     let options = {
         method: method,
+        mode: "cors",
         headers: {
             "Content-Type": content_type
         }
