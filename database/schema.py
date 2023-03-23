@@ -43,3 +43,10 @@ class FileSchema(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class FineTuneModelSchema(BaseModel):
+    fine_tuned_model: str
+
+    class Config:
+        orm_mode = True

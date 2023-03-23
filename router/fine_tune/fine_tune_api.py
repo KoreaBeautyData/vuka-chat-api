@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Depends, UploadFile, File
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from typing import Optional
+from typing import Optional, List
 
 from database import schema
 from database.database import get_db
@@ -20,6 +20,12 @@ def get_fine_tune_list(session: Session = Depends(get_db),
                                                        page=page,
                                                        page_length=page_length,
                                                        refresh=refresh)
+    return response
+
+
+@router.get('/model', tags=['fine-tune'], response_model=schema.DefaultModel)
+def get_fine_tune_model_list(session: Session = Depends(get_db)):
+    response = fine_tune_controller.get_fine_tune_model_list(session=session)
     return response
 
 

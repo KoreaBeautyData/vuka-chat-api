@@ -34,7 +34,19 @@ def get_fine_tune_list(session: Session, page, page_length, refresh=False):
 
     response.result_data = {
         'fine_tune_list': fine_tune_list,
-        'fine_tune_count': fine_tune_query.count()
+        'fine_tune_count': fine_tune_query.count(),
+        'page_length': page_length
+    }
+    return response
+
+
+def get_fine_tune_model_list(session: Session):
+    response = DefaultModel()
+
+    fine_tune_model_list = session.query(FineTune
+                        ).filter().order_by(FineTune.created_at.desc()).all()
+    response.result_data = {
+        'fine_tune_model_list': fine_tune_model_list,
     }
     return response
 

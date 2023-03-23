@@ -1,11 +1,12 @@
 <script>
     import { link } from 'svelte-spa-router'
+    import { page } from "../src/lib/store"
 </script>
 
 <!-- 네비게이션바 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom mb=5">
     <div class="container-fluid">
-        <a use:link class="navbar-brand" href="/faq">FAQ</a>
+        <a use:link class="navbar-brand" href="/faq" on:click="{() => {$page = 0}}">FAQ</a>
         <a use:link class="navbar-brand" href="/tuning">Tuning</a>
         <button
             class="navbar-toggler"
