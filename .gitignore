@@ -304,3 +304,5 @@ config/fastapi_test.pem
 config/config.py
 migrations
 csv_file
+node_modules/
+migrations/
