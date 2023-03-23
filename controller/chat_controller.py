@@ -1,4 +1,6 @@
 import openai
+import random
+from sqlalchemy import or_
 
 from sqlalchemy.orm import Session
 
@@ -66,4 +68,41 @@ def post_chat(request, session: Session):
     #
     # result = gpt.submit_request(question)
     # answer = result.choices[0].text.strip()
+    return result
+
+
+def post_chat_db(request, session: Session):
+    openai.api_key = config.SECRET_KEY
+
+    question = request.question
+    if question is not None:
+        question = question.strip()
+
+    gpt = GPT(temperature=config.temperature,
+              max_tokens=config.max_tokens)
+
+    query_filter = []
+    if question is not None:
+        for q in question.split(' '):
+            query_filter.append(or_(FAQ.question.like(f'%{q}%'),
+                                    FAQ.answer.like(f'%{q}%')))
+
+    faqs = session.query(FAQ).filter(*query_filter).all()
+
+    if len(faqs) > 0:
+        for faq in faqs:
+            gpt.add_example(Example(
+                f'{faq.question}',
+                f'{faq.answer}'
+            ))
+
+        idx = random.randrange(0, len(faqs))
+        question = faqs[idx].question
+
+    data = gpt.submit_request(question)
+    answer = data.choices[0].text.strip()
+    result = {
+        'question': f'Q: {question}',
+        'answer': answer
+    }
     return result

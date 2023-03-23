@@ -90,14 +90,16 @@
       <change beforePath="$PROJECT_DIR$/../django_bootstrap_calendar/.idea/django_bootstrap_calendar.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../django_tutorial/.idea/django_tutorial.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/fine_tune_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/fine_tune_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/chat_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/chat_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/schema.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/routes/Chat.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/routes/Chat.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/routes/Faq.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/routes/Faq.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps/_metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.vite/deps/_metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.vite/deps/svelte_motion.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.vite/deps/svelte_motion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/routes/Navigation.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/routes/Navigation.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/routes/Tuning.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/routes/Tuning.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/fine_tune/fine_tune_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/router/fine_tune/fine_tune_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router/chat/chat_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/router/chat/chat_api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fastgram/.idea/fastgram.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../fc_community/.idea/fc_community.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../fc_community/user/templates/register.html" beforeDir="false" />

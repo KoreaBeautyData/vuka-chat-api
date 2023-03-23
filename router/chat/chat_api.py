@@ -17,3 +17,11 @@ def post_chat(request: schema.ChatSchema,
     response = chat_controller.post_chat(request=request,
                                          session=session)
     return response
+
+
+@router.post('/db', tags=['chat'])
+def post_chat_db(request: schema.ChatDBSchema,
+                 session: Session = Depends(get_db)):
+    response = chat_controller.post_chat_db(request=request,
+                                            session=session)
+    return response

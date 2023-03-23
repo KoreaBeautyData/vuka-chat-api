@@ -38,6 +38,10 @@ class ChatSchema(BaseModel):
     fine_tuned_model: str
 
 
+class ChatDBSchema(BaseModel):
+    question: str
+
+
 class FileSchema(BaseModel):
     filename: str
 

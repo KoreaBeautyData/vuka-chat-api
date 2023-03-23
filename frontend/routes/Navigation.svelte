@@ -24,6 +24,9 @@
                 <li class="nav-item">
                     <a use:link class="nav-link" href="/chat">챗봇 Beta</a>
                 </li>
+                <li class="nav-item">
+                    <a use:link class="nav-link" href="/chat/db">챗봇 DB</a>
+                </li>
             </ul>
         </div>
     </div>
