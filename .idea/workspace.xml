@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="e1bbd086-1567-4f9b-9d0a-dc8b8bfc0db2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../FIFL/.idea/FIFL.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../FIFL/.idea/misc.xml" beforeDir="false" />
@@ -4329,6 +4330,9 @@
       <change beforePath="$PROJECT_DIR$/../wps_heejin/static/rest_framework_swagger/swagger-ui.min.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../wps_heejin/스크린샷_2019-06-03_14-43-02.png" beforeDir="false" />
     </list>
+=======
+    <list default="true" id="cb3c0d47-e885-4388-875c-a6ab1f19ba71" name="변경" comment="" />
+>>>>>>> 06e344cce6a407ba25685cbd0cef1ba5c50994fa
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -4337,7 +4341,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+<<<<<<< HEAD
         <option value="HTML File" />
+=======
+>>>>>>> 06e344cce6a407ba25685cbd0cef1ba5c50994fa
         <option value="Python Script" />
       </list>
     </option>
@@ -4348,26 +4355,40 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectId" id="2MuZvwyrROaNG3pM19hvcJGbAIB" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
+=======
+  <component name="ProjectId" id="2NLYgWK4089mL7xJiMlwsu54n6P" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+>>>>>>> 06e344cce6a407ba25685cbd0cef1ba5c50994fa
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+<<<<<<< HEAD
     "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "last_opened_file_path": "/Users/heejin/PycharmProjects/fastapi_test/frontend/routes",
     "settings.editor.selected.configurable": "preferences.fileTypes"
+=======
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "D:/IISroot",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+>>>>>>> 06e344cce6a407ba25685cbd0cef1ba5c50994fa
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+<<<<<<< HEAD
       <recent name="$PROJECT_DIR$/frontend/routes" />
       <recent name="$PROJECT_DIR$/router/fine_tune" />
       <recent name="$PROJECT_DIR$/controller" />
@@ -4404,11 +4425,23 @@
     </configuration>
     <configuration name="uvicorn" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="fastapi_test" />
+=======
+      <recent name="D:\IISroot\vukaAuth" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\IISroot\vukaAuth\app" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="uvicorn" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="vukaAuth" />
+>>>>>>> 06e344cce6a407ba25685cbd0cef1ba5c50994fa
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
+<<<<<<< HEAD
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -4416,6 +4449,16 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="uvicorn" />
       <option name="PARAMETERS" value="main:app --reload" />
+=======
+      <option name="SDK_HOME" value="D:\IISroot\vukaAuth\venv\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.11 (vukaAuth)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="uvicorn" />
+      <option name="PARAMETERS" value="app.main:app --reload" />
+>>>>>>> 06e344cce6a407ba25685cbd0cef1ba5c50994fa
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="true" />
@@ -4423,6 +4466,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+<<<<<<< HEAD
     <list>
       <item itemvalue="Python.uvicorn" />
       <item itemvalue="Python.chat_api" />
@@ -4454,5 +4498,32 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+=======
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="cb3c0d47-e885-4388-875c-a6ab1f19ba71" name="변경" comment="" />
+      <created>1679444940976</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679444940976</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="requirements.txt" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+>>>>>>> 06e344cce6a407ba25685cbd0cef1ba5c50994fa
   </component>
 </project>

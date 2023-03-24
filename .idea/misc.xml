@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 (fastapi_test)" project-jdk-type="Python SDK" />
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (vukaAuth)" project-jdk-type="Python SDK" />
+>>>>>>> 06e344cce6a407ba25685cbd0cef1ba5c50994fa
 </project>

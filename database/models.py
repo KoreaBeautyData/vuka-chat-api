@@ -28,3 +28,10 @@ class FineTune(Base):
     data = Column(Text)
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
+
+
+class SOCIAL(Base):
+    __tablename__ = 'socialinfo'
+
+    vkid = Column(Integer, primary_key=True, index=True)
+    kakao = Column(Text, default=None)

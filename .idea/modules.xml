@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/fastapi_test.iml" filepath="$PROJECT_DIR$/.idea/fastapi_test.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/vukaAuth.iml" filepath="$PROJECT_DIR$/.idea/vukaAuth.iml" />
+>>>>>>> 06e344cce6a407ba25685cbd0cef1ba5c50994fa
     </modules>
   </component>
 </project>
