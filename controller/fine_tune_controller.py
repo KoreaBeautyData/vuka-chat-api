@@ -21,7 +21,7 @@ def get_fine_tune_list(session: Session, page, page_length, refresh=False):
     fine_tune_query = session.query(FineTune).order_by(FineTune.created_at.desc())
 
     if refresh == True:
-        openai.api_key = config.SECRET_KEY
+        openai.api_key = config.OPENAI_SECRET_KEY
         for fine_tune in openai.FineTune.list().data:
             tune_data = fine_tune_query.filter(FineTune.ft_id == fine_tune.id).first()
             if tune_data is not None:
@@ -99,7 +99,7 @@ def post_fine_tuning(session: Session, request):
 
     filename = request.filename
 
-    openai.api_key = config.SECRET_KEY
+    openai.api_key = config.OPENAI_SECRET_KEY
 
     try:
         # 파일 업로드
@@ -131,7 +131,7 @@ def post_fine_tuning(session: Session, request):
                                result_code=config.ERROR_FILE_NOT_EXIST[0])
 
 def get_fine_tuning_status(id, session: Session):
-    openai.api_key = config.SECRET_KEY
+    openai.api_key = config.OPENAI_SECRET_KEY
 
     fine_tune = openai.FineTune.retrieve(id=id)
 

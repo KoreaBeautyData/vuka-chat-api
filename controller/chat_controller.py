@@ -11,7 +11,7 @@ from router.chat.gpt import GPT, Example
 
 
 def post_chat(request, session: Session):
-    openai.api_key = config.SECRET_KEY
+    openai.api_key = config.OPENAI_SECRET_KEY
 
     question = request.question
     fine_tuned_model = request.fine_tuned_model
@@ -72,7 +72,7 @@ def post_chat(request, session: Session):
 
 
 def post_chat_db(request, session: Session):
-    openai.api_key = config.SECRET_KEY
+    openai.api_key = config.OPENAI_SECRET_KEY
 
     question = request.question
     if question is not None:
