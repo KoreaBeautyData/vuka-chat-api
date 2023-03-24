@@ -306,3 +306,4 @@ migrations
 csv_file
 node_modules/
 migrations/
+*.pyc
