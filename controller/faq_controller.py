@@ -1,12 +1,12 @@
 import csv
 
+from fastapi import HTTPException
 from sqlalchemy import or_
 from sqlalchemy.orm import Session
 
 from database.schema import *
 from database.models import FAQ, FineTune
-from config.config import *
-from config.error_handling import UnicornException
+from config.constant import *
 
 
 def get_faq(session: Session, page, page_length, keyword):
@@ -55,8 +55,8 @@ def put_faq_detail(faq_id, request, session: Session):
     faq = session.query(FAQ).filter(FAQ.status >= STATUS_INACTIVE,
                                     FAQ.id == faq_id).first()
     if faq is None:
-        raise UnicornException(result_msg=ERROR_DATA_NOT_EXIST[1],
-                               result_code=ERROR_DATA_NOT_EXIST[0])
+        raise HTTPException(detail=ERROR_DATA_NOT_EXIST[1],
+                            status_code=ERROR_DATA_NOT_EXIST[0])
 
     faq.question = question
     faq.answer = answer
@@ -69,8 +69,7 @@ def get_faq_detail(faq_id, session: Session):
     faq = session.query(FAQ).filter(FAQ.id == faq_id,
                                     FAQ.status >= STATUS_INACTIVE).first()
     if faq is None:
-        raise UnicornException(result_msg=ERROR_DATA_NOT_EXIST[1],
-                               result_code=ERROR_DATA_NOT_EXIST[0])
+        raise HTTPException(status_code=ERROR_DATA_NOT_EXIST[0], detail=ERROR_DATA_NOT_EXIST[1])
 
     response.result_data = {
         'faq': faq
@@ -83,8 +82,8 @@ def delete_faq_detail(faq_id, session: Session):
 
     faq = session.query(FAQ).filter(FAQ.id == faq_id).first()
     if faq is None:
-        raise UnicornException(result_msg=ERROR_DATA_NOT_EXIST[1],
-                               result_code=ERROR_DATA_NOT_EXIST[0])
+        raise HTTPException(detail=ERROR_DATA_NOT_EXIST[1],
+                            status_code=ERROR_DATA_NOT_EXIST[0])
 
     faq.status = STATUS_DELETE
     session.commit()
@@ -97,7 +96,7 @@ def post_faq_csv(session: Session, request):
     data = []
 
     for faq in faq_list:
-        data.append((f'{faq.question}\n뷰카프로 ->\n', f' {faq.answer} \n##\n'))
+        data.append((f'{faq.question}{PROMPT_END_WITH}', f' {faq.answer}\n'))
 
     file = open(f'csv_file/{request.filename}.csv', 'w', newline='')
     writer = csv.writer(file)

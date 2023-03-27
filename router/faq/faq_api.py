@@ -11,7 +11,7 @@ router = APIRouter(
 )
 
 
-@router.get('', tags=['faq'])
+@router.get('', tags=['faq'], status_code=200)
 def get_faq(session: Session = Depends(get_db),
             page: Optional[int] = 1,
             page_length: Optional[int] = 3,
@@ -41,7 +41,7 @@ def put_faq_detail(faq_id: int,
     return response
 
 
-@router.get('/{faq_id}', tags=['faq'])
+@router.get('/{faq_id}', tags=['faq'], status_code=200)
 def get_faq_detail(faq_id: int,
                    session: Session = Depends(get_db)):
     response = faq_controller.get_faq_detail(faq_id=faq_id,

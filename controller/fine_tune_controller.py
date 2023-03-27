@@ -2,12 +2,12 @@ import openai
 import json
 import csv
 
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
-from config import config
+from config import config, constant
 from database.schema import DefaultModel
 from database.models import FineTune
-from config.error_handling import UnicornException
 
 
 def get_fine_tune_list(session: Session, page, page_length, refresh=False):
@@ -43,8 +43,8 @@ def get_fine_tune_list(session: Session, page, page_length, refresh=False):
 def get_fine_tune_model_list(session: Session):
     response = DefaultModel()
 
-    fine_tune_model_list = session.query(FineTune
-                        ).filter().order_by(FineTune.created_at.desc()).all()
+    fine_tune_model_list = session.query(FineTune).filter().order_by(FineTune.created_at.desc()).all()
+
     response.result_data = {
         'fine_tune_model_list': fine_tune_model_list,
     }
@@ -55,6 +55,9 @@ def get_fine_tune_detail(session: Session, fine_tune_id):
     response = DefaultModel()
 
     fine_tune = session.query(FineTune).filter(FineTune.id == fine_tune_id).first()
+    if fine_tune is None:
+        raise HTTPException(detail=constant.ERROR_MODEL_NOT_EXIST[1],
+                            status_code=constant.ERROR_MODEL_NOT_EXIST[0])
 
     response.result_data = {
         'fine_tune': fine_tune,
@@ -87,11 +90,11 @@ def post_convert_csv_to_jsonl(session: Session, request):
         }
         return result
     except FileNotFoundError:
-        raise UnicornException(result_msg=config.ERROR_FILE_NOT_EXIST[1],
-                               result_code=config.ERROR_FILE_NOT_EXIST[0])
+        raise HTTPException(detail=constant.ERROR_FILE_NOT_EXIST[1],
+                            status_code=constant.ERROR_FILE_NOT_EXIST[0])
     except IsADirectoryError:
-        raise UnicornException(result_msg=config.ERROR_FILE_NOT_EXIST[1],
-                               result_code=config.ERROR_FILE_NOT_EXIST[0])
+        raise HTTPException(detail=constant.ERROR_FILE_NOT_EXIST[1],
+                            status_code=constant.ERROR_FILE_NOT_EXIST[0])
 
 
 def post_fine_tuning(session: Session, request):
@@ -116,7 +119,7 @@ def post_fine_tuning(session: Session, request):
         if fine_tune is not None:
             fine_tune.status = fine_tune_model.status
             fine_tune.ft_id = fine_tune_model.id
-            fine_tune.model = config.model
+            fine_tune.model = constant.model
             fine_tune.fine_tune_model = fine_tune_model.fine_tuned_model
             fine_tune.data = json.dumps(fine_tune_model)
             session.commit()
@@ -127,8 +130,8 @@ def post_fine_tuning(session: Session, request):
         }
         return response
     except FileNotFoundError:
-        raise UnicornException(result_msg=config.ERROR_FILE_NOT_EXIST[1],
-                               result_code=config.ERROR_FILE_NOT_EXIST[0])
+        raise HTTPException(detail=constant.ERROR_FILE_NOT_EXIST[1],
+                            status_code=constant.ERROR_FILE_NOT_EXIST[0])
 
 def get_fine_tuning_status(id, session: Session):
     openai.api_key = config.OPENAI_SECRET_KEY

@@ -1,10 +1,14 @@
-import openai, uuid
-from config.config import *
+import uuid
+import openai
+
+from config import config
+from config import constant
 
 
 def set_openai_key():
     """Sets OpenAI key."""
-    openai.api_key = SECRET_KEY
+    openai.api_key = config.OPENAI_SECRET_KEY
+
 
 class Example:
     """Stores an input, output pair and formats it to prime the model."""
@@ -38,9 +42,9 @@ class GPT:
     A user can add examples and set parameters of the API request.
     """
     def __init__(self,
-                 engine=engine,
-                 temperature=temperature,
-                 max_tokens=max_tokens,
+                 engine=constant.engine,
+                 temperature=constant.temperature,
+                 max_tokens=constant.max_tokens,
                  input_prefix="Q: ",
                  input_suffix="\n",
                  output_prefix="A: ",

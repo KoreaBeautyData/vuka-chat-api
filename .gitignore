@@ -305,8 +305,7 @@ migrations
 csv_file
 node_modules/
 migrations/
+database/alembic.ini
 *.pyc
-.venv
-pip-selfcheck.json
-config.py
+.vscode/
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,venv
