@@ -133,16 +133,19 @@ def post_fine_tuning(session: Session, request):
         raise HTTPException(detail=constant.ERROR_FILE_NOT_EXIST[1],
                             status_code=constant.ERROR_FILE_NOT_EXIST[0])
 
-def get_fine_tuning_status(id, session: Session):
+def get_fine_tuning_status(fine_tune_id, session: Session):
     openai.api_key = config.OPENAI_SECRET_KEY
 
-    fine_tune = openai.FineTune.retrieve(id=id)
+    fine_tune_obj = session.query(FineTune).filter(FineTune.id == fine_tune_id).first()
+    if fine_tune_obj is None:
+        raise HTTPException(detail=constant.ERROR_MODEL_NOT_EXIST[1],
+                            status_code=constant.ERROR_MODEL_NOT_EXIST[0])
 
-    fine_tune_obj = session.query(FineTune).filter(FineTune.ft_id == id).first()
-    if fine_tune_obj is not None:
-        fine_tune_obj.status = fine_tune.status
-        fine_tune_obj.fine_tuned_model = fine_tune.fine_tuned_model
-        session.commit()
+    fine_tune = openai.FineTune.retrieve(id=fine_tune_obj.ft_id)
+
+    fine_tune_obj.status = fine_tune.status
+    fine_tune_obj.fine_tuned_model = fine_tune.fine_tuned_model
+    session.commit()
 
     result = {
         'status': fine_tune.status,

@@ -53,9 +53,9 @@ def post_fine_tuning(request: schema.FileSchema,
     return response
 
 
-@router.get('/status', tags=['fine-tune'])
+@router.get('/{fine_tune_id}/status', tags=['fine-tune'])
 def get_fine_tuning_status(session: Session = Depends(get_db),
-                           id: Optional[str] = None):
+                           fine_tune_id: Optional[str] = None):
     response = fine_tune_controller.get_fine_tuning_status(session=session,
-                                                           id=id)
+                                                           fine_tune_id=fine_tune_id)
     return response
