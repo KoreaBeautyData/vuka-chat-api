@@ -299,3 +299,4 @@ package
 csv_file/
 config/fastapi_test.pem
 config/config.py
+*.pyc
